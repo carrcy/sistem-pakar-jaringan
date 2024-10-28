@@ -3,11 +3,24 @@ session_start();
 require_once '../helper/connection.php'; // Menghubungkan ke database
 date_default_timezone_set("Asia/Jakarta");
 
+//informasi untuk user belum memilih gejala
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $iduser = $_POST['iduser']; // Sanitasi input
     $gejala_terpilih = isset($_POST['nmgejala']) ? $_POST['nmgejala'] : [];
     $tgl = date("Y/m/d");
+
+    // Cek apakah pengguna memilih gejala
+    if (empty($gejala_terpilih)) {
+        $_SESSION['info'] = [
+            'status' => 'failed',
+            'message' => 'Setidaknya satu gejala harus dipilih!'
+        ];
+        header('Location: tanya.php');
+        exit;
+    }
 
     // Menyimpan konsultasi
     $query = "INSERT INTO kosultasi (idkonsultasi, tanggal, iduser) VALUES (NULL, '$tgl', '$iduser')";
@@ -17,15 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['info'] = [
             'status' => 'failed',
             'message' => 'Gagal menambahkan data ke basis aturan: ' . mysqli_error($connection)
-        ];
-        header('Location: ./index.php');
-        exit;
-    }
-
-    if (empty($gejala_terpilih)) {
-        $_SESSION['info'] = [
-            'status' => 'failed',
-            'message' => 'Setidaknya satu gejala harus dipilih!'
         ];
         header('Location: ./index.php');
         exit;
@@ -93,12 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Menyimpan hasil kecocokan masalah
-        if($peluang>0){
+        if($peluang > 0){
             $query9 = "INSERT INTO detail_masalah (idkonsultasi, idmasalah, persentase) VALUES ('$idkonsultasi', '$idmasalah', '$peluang')";
             $result9 = mysqli_query($connection, $query9);
-        if (!$result9) {
-            echo "Error: " . mysqli_error($connection);
-        }
+            if (!$result9) {
+                echo "Error: " . mysqli_error($connection);
+            }
         }
     }
 
