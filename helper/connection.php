@@ -2,6 +2,6 @@
 $dbhost = "localhost";
 $dbusername = "root";
 $dbpassword = "";
-$dbname = "dbsp1";
+$dbname = "dbsistempakar";
 
 $connection = mysqli_connect($dbhost, $dbusername, $dbpassword,  $dbname);

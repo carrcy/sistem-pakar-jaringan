@@ -31,6 +31,7 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    
     <link rel="shortcut icon" href="../../assets/img/logoNet.png" type="image/x-icon">
 
     <style>
@@ -84,12 +85,12 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
                 <div class="card-body">
                     <h4 class="card-title text-success text-center mb-4 fw-bold"><strong>Riwayat Konsultasi</strong></h4>
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped text-center">
+                        <table class="table table-hover table-striped text-center" id="table-1">
                             <thead class="table-success">
                                 <tr>
-                                    <th><strong>No</strong></th>
-                                    <th><strong>Tanggal</strong></th>
-                                    <th><strong>Cek Detail</strong></th>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Cek Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,11 +100,9 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
                                 ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= date('d-m-Y', strtotime($data['tanggal'])) ?></td> <!-- Format tanggal -->
+                                    <td><?= date('d-m-Y', strtotime($data['tanggal'])) ?></td> 
                                     <td>
-                                        <a class="btn btn-sm btn-primary" href="detail.php?idkonsultasi=<?= $data['idkonsultasi'] ?>" style="transition: background-color 0.3s ease; border-radius: 5px;">
-                                            <strong>Detail</strong> <!-- Menggunakan <strong> untuk menebalkan teks -->
-                                        </a>
+                                        <a class="btn btn-sm btn-primary" href="detail.php?idkonsultasi=<?= $data['idkonsultasi'] ?>" style="transition: background-color 0.3s ease; border-radius: 5px;">Detail</a>
                                     </td>
 
                                 </tr>
@@ -135,11 +134,8 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
       crossorigin="anonymous"
     ></script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-      crossorigin="anonymous"
-    ></script>
+    
+    <script src="../assets/js/page/modules-datatables.js"></script>
   </body>
 </html>
 
@@ -180,4 +176,6 @@ if (isset($_SESSION['info'])) :
   $_SESSION['info'] = null;
 endif;
 ?>
+
+
 

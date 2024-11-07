@@ -41,12 +41,9 @@ $data_masalah = mysqli_fetch_array($result);
           <div class="container mt-5">
               <h2>Pilih Masalah</h2>
               
-              <!-- Form untuk submit data -->
-              <form action="store.php" method="POST"> <!-- Ubah "proses.php" ke file PHP tujuan Anda -->
-                  <!-- Dropdown yang akan menggunakan Chosen -->
+              <form action="store.php" method="POST"> 
                   <input type="hidden" name="iduser" value="<?= $iduser; ?>">
-                  <!-- Dropdown yang akan menggunakan Chosen -->
-                  <div class="card-body">
+                  ard-body">
                     <div class="input-group">
 
                       <input class="form-control" type="text" name="nama" size="80" value="<?= $data_masalah['nama']?>" disabled>
