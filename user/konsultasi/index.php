@@ -1,7 +1,7 @@
 <?php
-//require_once '../layout/_top.php';
-// session_start();
 require_once '../helper/auth.php';
+isLogin('user');
+
 
 // isLogin();
 require_once '../helper/connection.php';

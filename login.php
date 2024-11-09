@@ -18,19 +18,19 @@ if (isset($_POST['submit'])) {
 
   // Jika login berhasil (baris data ditemukan)
   if ($result->num_rows === 1)  {
-    // Simpan data pengguna ke dalam session, termasuk iduser
+    
     $_SESSION['login'] = [
-        'iduser' => $row['iduser'],      // Menyimpan iduser ke session
-        'nama' => $row['nama'],          // Menyimpan nama ke session (opsional)
-        'username' => $row['username'],  // Menyimpan username ke session (opsional)
-        'level' => $row['level']         // Menyimpan level ke session
+        'iduser' => $row['iduser'],
+        'nama' => $row['nama'],        
+        'username' => $row['username'], 
+        'level' => $row['level']       
     ];
 
     // Cek level pengguna untuk menentukan halaman tujuan
     if ($row['level'] == 'user') {
-        header('Location: user/dashboard2/index.php'); // Pengguna biasa
+        header('Location: user/dashboard2/index.php'); 
     } elseif ($row['level'] == 'admin') {
-        header('Location: dashboard/index.php');       // Admin
+        header('Location: dashboard/index.php');     
     }
     exit();
   } else {
@@ -38,8 +38,6 @@ if (isset($_POST['submit'])) {
     $error = true;
   }
 }
-
-
 ?>
 
 <!DOCTYPE html>

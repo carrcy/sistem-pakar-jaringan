@@ -1,5 +1,7 @@
 <?php
-session_start(); // Tambahkan ini di awal untuk menggunakan $_SESSION
+require_once '../helper/auth.php';
+isLogin('user');
+
 require_once '../helper/connection.php';
 
 

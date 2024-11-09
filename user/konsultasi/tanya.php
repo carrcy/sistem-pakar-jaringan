@@ -1,5 +1,5 @@
 <?php
-session_start(); // Tambahkan ini di awal untuk menggunakan $_SESSION
+session_start(); 
 require_once '../helper/connection.php';
 
 // Informasi user belum memilih gejala
@@ -16,12 +16,14 @@ if (isset($_SESSION['info'])) {
 }
 
 if (!isset($_SESSION['login'])) {
+    // Redirect atau penanganan jika pengguna tidak login
     header("Location: login.php");
     exit();
 }
 
 $iduser = $_SESSION['login']['iduser'];
 
+// Query ke database
 $result = mysqli_query($connection, "SELECT * FROM user WHERE iduser='$iduser'");
 $result2 = mysqli_query($connection, "SELECT * FROM gejala ORDER BY nmgejala ASC");
 $data_masalah = mysqli_fetch_array($result);
@@ -31,14 +33,13 @@ $data_masalah = mysqli_fetch_array($result);
 <html lang="en">
 <head>
     <title>NetSolver</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+    <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="shortcut icon" href="../../assets/img/logoNet.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
-
 
     <style>
         .nav-link:hover, .dropdown-item:hover {
@@ -49,6 +50,7 @@ $data_masalah = mysqli_fetch_array($result);
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-success bg-success shadow-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand text-white ms-5 h1" href="#">NETSOLVER</a>
@@ -71,17 +73,19 @@ $data_masalah = mysqli_fetch_array($result);
         </div>
     </nav>
 
+    <!-- Section Title -->
     <div class="con mt-5 h-25 bg-success text-center pb-4 pt-5">
         <h1 class="text-white fw-bold display-5"><strong>Konsultasi Keluhan</strong></h1>
     </div>
 
+    <!-- Form -->
     <form action="store.php" method="POST" class="m-3 p-4 bg-light shadow rounded">
         <input type="hidden" name="iduser" value="<?= $iduser; ?>">
         
         <div class="mb-3">
             <label for="nama" class="form-label h5 text-success"><strong>Nama:</strong></label>
             <input class="form-control" id="nama" type="text" name="nama" value="<?= $data_masalah['nama'] ?>" disabled>
-            <input type="hidden" name="nama" value="<?= $data_masalah['nama'] ?>"> 
+            <input type="hidden" name="nama" value="<?= $data_masalah['nama'] ?>"> <!-- Menyimpan nilai yang sama pada input hidden -->
         </div>
 
         <label for="" class="h4 text-success text-center mb-3 fw-bold">Pilih gejala-gejala berikut:</label>

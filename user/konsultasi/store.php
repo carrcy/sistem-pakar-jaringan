@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../helper/connection.php'; // Menghubungkan ke database
+require_once '../helper/connection.php'; 
 date_default_timezone_set("Asia/Jakarta");
 
 //informasi untuk user belum memilih gejala
