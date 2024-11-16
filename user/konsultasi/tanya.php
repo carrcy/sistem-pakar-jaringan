@@ -120,7 +120,6 @@ $data_masalah = mysqli_fetch_array($result);
 
         <!-- Submit Button -->
         <div class="d-flex justify-content-center mt-4">
-            <button type="submit" class="btn btn-sm btn-primary" href="detail.php?idkonsultasi=<?= $data['idkonsultasi'] ?>" style="transition: background-color 0.3s ease; border-radius: 5px;">Detail</button>
             <button type="submit" class="btn btn-success rounded-5 btn-lg">Ajukan Pertanyaan</button>
         </div>
     </form>
