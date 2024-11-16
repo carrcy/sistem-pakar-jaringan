@@ -1,5 +1,7 @@
 <?php
-session_start();
+require_once '../helper/auth.php';
+isLogin('user');
+
 require_once '../helper/connection.php'; 
 date_default_timezone_set("Asia/Jakarta");
 

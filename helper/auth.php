@@ -14,7 +14,7 @@ function isLogin($requiredRole = null) {
 
     // Jika role diperlukan, lakukan pengecekan level akses
     if ($requiredRole !== null && $_SESSION['login']['level'] !== $requiredRole) {
-        header('Location: ../login.php'); // Arahkan ke halaman lain jika akses ditolak 
+        header('Location: ../unauthorized.php'); // Arahkan ke halaman lain jika akses ditolak 
         exit;
     }
     

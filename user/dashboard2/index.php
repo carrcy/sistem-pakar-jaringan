@@ -47,9 +47,12 @@ $total_kembali = mysqli_fetch_array($idkonsultasi)[0];
             /* height: 15%; */
 
         }
+        .nav-link{
+          color: white;
+        }
+        
         .nav-link:hover{
-          border-bottom: 2px solid white;
-          transition: border-bottom 0.3s ease-in-out;
+          color: #E7D37F;
         }
 
         .container-fluid{
@@ -84,13 +87,13 @@ $total_kembali = mysqli_fetch_array($idkonsultasi)[0];
         <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0 gap-4 ">
             <li class="nav-item">
-              <a class="nav-link fw-bold text-white " aria-current="page" href="index.php">Home</a>
+              <a class="nav-link fw-bold" aria-current="page" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold text-white " aria-current="page" href="../konsultasi/tanya.php">Tanya Pakar</a>
+              <a class="nav-link fw-bold" aria-current="page" href="../konsultasi/tanya.php">Tanya Pakar</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link fw-bold text-white " aria-current="page" href="../konsultasi/index.php">Riwayat</a>
+              <a class="nav-link fw-bold" aria-current="page" href="../konsultasi/index.php">Riwayat</a>
               
             </li>
             <li class="nav-item dropdown ps-1 pt-1">

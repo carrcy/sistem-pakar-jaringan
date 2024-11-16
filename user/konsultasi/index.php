@@ -48,9 +48,12 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
 
 
       }
-      .nav-link:hover, .dropdown-item:hover {
-          border-bottom: 2px solid green;
-          transition: border-bottom 0.3s ease-in-out;
+      .nav-link{
+          color: green;
+        }
+        
+        .nav-link:hover{
+          color: #FF9A00;
         }
     </style>
   </head>
@@ -65,13 +68,13 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
           <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0 gap-4">
                   <li class="nav-item">
-                      <a href="../../user/dashboard2/index.php" class="nav-link text-success fw-bold">Home</a>
+                      <a href="../../user/dashboard2/index.php" class="nav-link fw-bold">Home</a>
                   </li>
                   <li class="nav-item">
-                      <a href="tanya.php" class="nav-link text-success fw-bold">Tanya Pakar</a>
+                      <a href="tanya.php" class="nav-link fw-bold">Tanya Pakar</a>
                   </li>
                   <li class="nav-item">
-                      <a href="../../user/dashboard2/index.php" class="nav-link text-success fw-bold">Kembali</a>
+                      <a href="../../user/dashboard2/index.php" class="nav-link fw-bold">Kembali</a>
                   </li>
               </ul>
           </div>
@@ -128,6 +131,9 @@ $result = mysqli_query($connection, "SELECT * FROM kosultasi WHERE iduser='$idus
             <p class="text-center text-success fw-bold">© 2024 Netsolver, Inc</p>
           </footer>
       
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

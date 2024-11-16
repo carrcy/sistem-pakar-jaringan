@@ -1,5 +1,7 @@
 <?php
-session_start(); 
+require_once '../helper/auth.php';
+isLogin('user');
+
 require_once '../helper/connection.php';
 
 // Informasi user belum memilih gejala
@@ -42,9 +44,12 @@ $data_masalah = mysqli_fetch_array($result);
     <link rel="shortcut icon" href="../../assets/img/logoNet.png" type="image/x-icon">
 
     <style>
-        .nav-link:hover, .dropdown-item:hover {
-            border-bottom: 2px solid white;
-            transition: border-bottom 0.3s ease-in-out;
+        .nav-link{
+            color: white;
+        }
+        
+        .nav-link:hover{
+            color: #E7D37F;
         }
     </style>
 </head>
@@ -60,13 +65,13 @@ $data_masalah = mysqli_fetch_array($result);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0 gap-3 ">
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold text-white" aria-current="page" href="../dashboard2/index.php">Home</a>
+                        <a class="nav-link fw-bold" aria-current="page" href="../dashboard2/index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold text-white" href="#">Tanya Pakar</a>
+                        <a class="nav-link fw-bold" href="#">Tanya Pakar</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link active fw-bold text-white" href="index.php">Riwayat</a>
+                        <a class="nav-link fw-bold" href="index.php">Riwayat</a>
                     </li>
                 </ul>
             </div>
@@ -75,7 +80,7 @@ $data_masalah = mysqli_fetch_array($result);
 
     <!-- Section Title -->
     <div class="con mt-5 h-25 bg-success text-center pb-4 pt-5">
-        <h1 class="text-white fw-bold display-5"><strong>Konsultasi Keluhan</strong></h1>
+        <h3 class="text-white fw-bold display-6"><strong>Konsultasi Keluhan</strong></h3>
     </div>
 
     <!-- Form -->
@@ -115,6 +120,7 @@ $data_masalah = mysqli_fetch_array($result);
 
         <!-- Submit Button -->
         <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-sm btn-primary" href="detail.php?idkonsultasi=<?= $data['idkonsultasi'] ?>" style="transition: background-color 0.3s ease; border-radius: 5px;">Detail</button>
             <button type="submit" class="btn btn-success rounded-5 btn-lg">Ajukan Pertanyaan</button>
         </div>
     </form>

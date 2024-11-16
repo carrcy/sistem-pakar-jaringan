@@ -1,8 +1,34 @@
 <?php
-require_once '../helper/connection.php';
-$idkonsultasi= $_GET['idkonsultasi'];
+require_once '../helper/auth.php';
+isLogin('user');
 
-$result = mysqli_query($connection, "SELECT kosultasi.tanggal, detail_masalah.idmasalah, detail_masalah.persentase FROM detail_masalah INNER JOIN kosultasi ON detail_masalah.idkonsultasi= kosultasi.idkonsultasi WHERE kosultasi.idkonsultasi='$idkonsultasi' ");
+require_once '../helper/connection.php';
+
+// Pastikan idkonsultasi ada di URL
+if (!isset($_GET['idkonsultasi']) || empty($_GET['idkonsultasi'])) {
+    die('ID Konsultasi tidak ditemukan.');
+}
+$idkonsultasi = $_GET['idkonsultasi'];
+
+// Query untuk mengambil data konsultasi termasuk nama user dan tanggal
+$result = mysqli_query($connection, "
+    SELECT 
+        kosultasi.tanggal, 
+        detail_masalah.idmasalah, 
+        detail_masalah.persentase, 
+        user.nama AS nama_user 
+    FROM detail_masalah 
+    INNER JOIN kosultasi ON detail_masalah.idkonsultasi = kosultasi.idkonsultasi 
+    INNER JOIN user ON kosultasi.iduser = user.iduser
+    WHERE kosultasi.idkonsultasi = '$idkonsultasi'
+");
+
+// Cek apakah query berhasil
+if (!$result) {
+    die('Query failed: ' . mysqli_error($connection));
+}
+
+$data = mysqli_fetch_array($result); 
 ?>
 
 <!doctype html>
@@ -14,10 +40,13 @@ $result = mysqli_query($connection, "SELECT kosultasi.tanggal, detail_masalah.id
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link rel="shortcut icon" href="../../assets/img/logoNet.png" type="image/x-icon">
   <style>
-    .nav-link:hover, .dropdown-item:hover {
-      border-bottom: 2px solid white;
-      transition: border-bottom 0.3s ease-in-out;
-    }
+    .nav-link{
+          color: white;
+        }
+        
+        .nav-link:hover{
+          color: #E7D37F;
+        }
     .footer {
       position: fixed;
       bottom: 0;
@@ -38,9 +67,9 @@ $result = mysqli_query($connection, "SELECT kosultasi.tanggal, detail_masalah.id
       </button>
       <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0 gap-4">
-          <li class="nav-item"><a href="../../user/dashboard2/index.php" class="nav-link text-white fw-bold">Home</a></li>
-          <li class="nav-item"><a href="tanya.php" class="nav-link text-white fw-bold">Tanya Pakar</a></li>
-          <li class="nav-item"><a href="index.php" class="nav-link text-white fw-bold">Kembali</a></li>
+          <li class="nav-item"><a href="../../user/dashboard2/index.php" class="nav-link fw-bold">Home</a></li>
+          <li class="nav-item"><a href="tanya.php" class="nav-link fw-bold">Tanya Pakar</a></li>
+          <li class="nav-item"><a href="index.php" class="nav-link fw-bold">Kembali</a></li>
         </ul>
       </div>
     </div>
@@ -48,9 +77,15 @@ $result = mysqli_query($connection, "SELECT kosultasi.tanggal, detail_masalah.id
 
   <section class="section vh-custom d-flex align-items-center mt-5 mb-5">
     <div class="container mt-5">
-      <div class="card border shadow rounded-4 p-5">
+      
         <div class="card-body">
           <h2 class="text-center text-success fw-bold mb-4">Daftar Masalah dan Solusi</h2>
+          
+          <div class="mb-4">
+            <h5 class="fw-bold">Nama Pengguna: <?= $data['nama_user'] ?></h5>
+            <p class="text-muted">Tanggal Konsultasi: <?= date("d F Y", strtotime($data['tanggal'])) ?></p>
+          </div>
+
           <div class="table-responsive">
             <table class="table table-hover table-striped table-bordered w-100">
               <thead class="table-success">
@@ -64,9 +99,13 @@ $result = mysqli_query($connection, "SELECT kosultasi.tanggal, detail_masalah.id
               <tbody>
                 <?php
                 $no = 1;
-                while ($data = mysqli_fetch_array($result)) :
+                do {
+                  // Ambil data masalah terkait
                   $idmasalah = $data['idmasalah'];
                   $result2 = mysqli_query($connection, "SELECT * FROM masalah WHERE idmasalah='$idmasalah'");
+                  if (!$result2) {
+                      die('Query failed: ' . mysqli_error($connection));
+                  }
                   $data2 = mysqli_fetch_array($result2);
                 ?>
                   <tr>
@@ -75,12 +114,12 @@ $result = mysqli_query($connection, "SELECT kosultasi.tanggal, detail_masalah.id
                     <td><?= $data['persentase'] ?>%</td>
                     <td><?= $data2['solusi'] ?></td>
                   </tr>
-                <?php endwhile; ?>
+                <?php } while ($data = mysqli_fetch_array($result)); ?>
               </tbody>
             </table>
+            <a href="cetak.php?idkonsultasi=<?= $idkonsultasi?>" target="_blank" class="btn btn-primary">Cetak PDF</a>
           </div>
         </div>
-      </div>
     </div>
   </section>
 

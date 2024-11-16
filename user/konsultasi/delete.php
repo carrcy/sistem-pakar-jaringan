@@ -1,5 +1,7 @@
 <?php
-session_start();
+require_once '../helper/auth.php';
+isLogin('user');
+
 require_once '../helper/connection.php';
 
 $kode_matkul= $_GET['kode_matkul'];

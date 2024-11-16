@@ -22,9 +22,16 @@ session_start();
         .dua {
                 height: 100vh;
             } 
-        .nav-link:hover, .dropdown-item:hover {
-          border-bottom: 2px solid white;
-          transition: border-bottom 0.3s ease-in-out;
+        .nav-link{
+          color: white;
+        }
+        
+        .nav-link:hover{
+          color: #E7D37F;
+        }
+        
+        .dropdown-item:hover {
+          
         }
         .container-fluid{
           width: 90%;
@@ -37,26 +44,20 @@ session_start();
     <!-- HEADER -->
     <nav class="navbar navbar-expand-lg navbar-success bg-success shadow-lg fixed-top ">
       <div class="container-fluid ">
-        <a class="navbar-brand text-white h1 fw-bold" href="#">NETSOLVER</a>
+        <a class="navbar-brand text-white  h1 fw-bold" href="#">NETSOLVER</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse text-right" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 me-5 mb-lg-0 gap-4 ">
             <li class="nav-item">
-              <a class="nav-link fw-bold text-white " aria-current="page" href="utama.php">Home</a>
+              <a class="nav-link fw-bold  " aria-current="page" href="utama.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold text-white " aria-current="page" href="login.php">Tanya Pakar</a>
+              <a class="nav-link fw-bold  " aria-current="page" href="login.php">Tanya Pakar</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fw-bold text-white " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Dropdown </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="login.php">Login</a></li>
-                <li><a class="dropdown-item" href="./regitrasi/create.php">Daftar Akun</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#">Login Admin</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link fw-bold  " aria-current="page" href="./regitrasi/create.php">Daftar</a>
             </li>
             <li class="nav-item ">
               <a class="btn btn-light rounded-pill px-3 ps-4 pe-4 text-success" href="login.php">Login</a>
